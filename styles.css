@@ -11,8 +11,7 @@ body {
   color: rgb(0, 0, 0);
 }
 .music-player {
-  /* later height auto */
-  height: 100vh;
+  height: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -22,6 +21,12 @@ body {
   text-align: center;
 }
 .container {
+  width: 90vw;
+  max-width: 480px;
+  /* display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; */
   background: #f3f5eb;
   border: solid 1px transparent;
   padding: 30px;
@@ -48,9 +53,32 @@ body {
 .track-name {
   margin: 5px 0;
 }
+.slider-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 1.5rem 6rem;
+}
+
 .buttons {
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
   align-items: center;
-  border: solid 1px black;
+  margin: 1rem 0;
+  padding: 1rem;
+  border-radius: 10px;
+  border: solid 1px transparent;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 8px, rgba(0, 0, 0, 0.05) 0px 5px 5px;
+  background: #eeeeeb;
+}
+
+.play {
+  transition: 0.2s ease-in-out all;
+  border-radius: 50%;
+}
+.play:hover {
+  background-color: #000;
+  color: #fff;
+  scale: 1.1;
 }
