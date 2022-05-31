@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="./normalize.css">
+        <!-- favicon console fix -->
+        <link rel="shortcut icon" href="#">
+        <!-- css styles -->
+        <link rel="stylesheet" href="./styles.css">
+        <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+            />
+        <title>Music Player</title>
+    </head>
+    <body>
+        <main class="music-player">
+            <div class="container">
+                <!-- title -->
+                <h2>Music Player</h2>
+                <!-- music player -->
+                <section class="player">
+                    <!-- img casette -->
+                    <div class="img-container">
+                        <img class="img"
+                            src="./player.svg" alt="casette">
+                    </div>
+                    <!-- display details -->
+                    <div class="details">
+                        <h4 class="now-playing">Playing music X of Y</h4>
+                        <p class="track-name">track name</p>
+                        <p class="track mood">track characteristics</p>
+                    </div>
+                    <!-- time slider -->
+                    <div class="slider-container">
+                        <div class="current-time">00:00</div>
+                        <input
+                            class="seek-slider"
+                            onchange="seekTo()"
+                            type="range"
+                            min="1"
+                            max="100"
+                            value="0">
+                        <div class="total-duration">00:00</div>
+                    </div>
+                    <!-- volume slider -->
+                    <div class="slider-container">
+                        <i class="fa fa-volume-down"></i>
+                        <input
+                            class="volume-slider"
+                            onchange="setVolume()"
+                            type="range"
+                            min="1"
+                            max="100"
+                            value="99">
+                        <i class="fa fa-volume-up"></i>
+                    </div>
+                    <!-- control buttons -->
+                    <div class="buttons">
+                        <div class="random-track" onclick="randomTrack()">
+                            <i class="fas fa-random fa-2x" title="random"></i>
+                        </div>
+                        <div class="prev-track" onclick="prevTrack()">
+                            <i class="fa fa-step-backward fa-2x"></i>
+                        </div>
+                        <div class="playpause-track" onclick="playpauseTrack()">
+                            <i class="fa fa-play-circle fa-5x"></i>
+                        </div>
+                        <div class="next-track" onclick="nextTrack()">
+                            <i class="fa fa-step-forward fa-2x"></i>
+                        </div>
+                        <div class="repeat-track" onclick="repeatTrack()">
+                            <i class="fa fa-repeat fa-2x" title="repeat"></i>
+                        </div>
+                    </div>
+
+
+
+
+                </section>
+
+
+
+                <!-- song list -->
+                <section class="list">
+                    <ul>
+                        <li>song 1</li>
+                        <li>song 1</li>
+                        <li>song 1</li>
+                    </ul>
+
+                </section>
+            </div>
+        </main>
+
+
+
+
+
+        <script src="./index.js"></script>
+    </body>
+</html>
