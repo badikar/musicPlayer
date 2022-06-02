@@ -30,14 +30,13 @@
                     <div class="details">
                         <h4 class="now-playing">Playing music X of Y</h4>
                         <p class="track-name">track name</p>
-                        <p class="track mood">track characteristics</p>
+                        <p class="track-mood">track characteristics</p>
                     </div>
                     <!-- time slider -->
                     <div class="slider-container">
                         <div class="current-time">00:00</div>
                         <input
                             class="seek-slider"
-                            onchange="seekTo()"
                             type="range"
                             min="1"
                             max="100"
@@ -49,7 +48,6 @@
                         <i class="fa fa-volume-down"></i>
                         <input
                             class="volume-slider"
-                            onchange="setVolume()"
                             type="range"
                             min="1"
                             max="100"
@@ -58,27 +56,22 @@
                     </div>
                     <!-- control buttons -->
                     <div class="buttons">
-                        <div class="random-track" onclick="randomTrack()">
+                        <div class="random-track">
                             <i class="fas fa-random fa-2x" title="random"></i>
                         </div>
-                        <div class="prev-track" onclick="prevTrack()">
+                        <div class="prev-track">
                             <i class="fa fa-step-backward fa-2x"></i>
                         </div>
-                        <div class="playpause-track play"
-                            onclick="playpauseTrack()">
+                        <div class="play-track">
                             <i class="fa fa-play-circle fa-4x"></i>
                         </div>
-                        <div class="next-track" onclick="nextTrack()">
+                        <div class="next-track">
                             <i class="fa fa-step-forward fa-2x"></i>
                         </div>
-                        <div class="repeat-track" onclick="repeatTrack()">
+                        <div class="repeat-track">
                             <i class="fa fa-repeat fa-2x" title="repeat"></i>
                         </div>
                     </div>
-
-
-
-
                 </section>
 
 
@@ -104,8 +97,7 @@
 
 
 
-
-
+        <script></script>
         <script src="./index.js"></script>
     </body>
 </html>
