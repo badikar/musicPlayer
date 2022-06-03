@@ -26,7 +26,6 @@ const totalDuration = getEl('.total-duration');
 let trackIndex = 0;
 const track = document.createElement('audio');
 
-window.addEventListener('DOMContentLoaded', loadTrack(trackIndex));
 // Initial loaded song DOM info
 function loadTrack(index) {
   trackNumber.innerText = `Playing ${tracks[index].id} of ${tracks.length}`;
@@ -36,18 +35,30 @@ function loadTrack(index) {
 }
 
 function playNext() {
-  console.log(trackIndex);
-  console.log(tracks.length);
+  trackIndex++;
+  if (trackIndex > tracks.length - 1) {
+    trackIndex = 0;
+  }
+  loadTrack(trackIndex);
+  playTrack();
 }
 
 function playPrev() {
-  if (trackIndex === 0) {
+  trackIndex--;
+  if (trackIndex < 0) {
     trackIndex = tracks.length - 1;
-  } else {
-    loadTrack(trackIndex--);
-    playTrack();
   }
+  loadTrack(trackIndex);
+  playTrack();
 }
+function playRandom() {
+  console.log('ok');
+  trackIndex = Math.floor(Math.random() * tracks.length);
+  console.log(trackIndex);
+  loadTrack(trackIndex);
+  playTrack();
+}
+
 function pauseTrack() {
   playPause.children[0].classList.remove('fa-play-circle');
   playPause.children[0].classList.add('fa-pause-circle');
@@ -60,6 +71,7 @@ function playTrack() {
 }
 
 // event listeners
+window.addEventListener('DOMContentLoaded', loadTrack(trackIndex));
 
 playPause.addEventListener('click', () => {
   const isPlaying = playPause.querySelector('.fa-play-circle');
@@ -69,5 +81,7 @@ playPause.addEventListener('click', () => {
     playTrack();
   }
 });
+
 nextTrack.addEventListener('click', playNext);
 prevTrack.addEventListener('click', playPrev);
+randomTrack.addEventListener('click', playRandom);
