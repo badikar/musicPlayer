@@ -17,7 +17,6 @@ let trackIndex = 0;
 let isPlaying = false;
 let isRepeated = false;
 const track = document.createElement('audio');
-
 // Initial load track DOM info
 function loadTrack(index) {
   trackNumber.innerText = `Playing ${tracks[index].id} of ${tracks.length}`;
@@ -90,7 +89,6 @@ repeatTrack.addEventListener('click', () => {
   }
 });
 track.addEventListener('ended', () => {
-  console.log('ended');
   playNext();
 });
 nextTrack.addEventListener('click', playNext);
