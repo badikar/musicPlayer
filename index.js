@@ -89,6 +89,10 @@ repeatTrack.addEventListener('click', () => {
     repeatOff();
   }
 });
+track.addEventListener('ended', () => {
+  console.log('ended');
+  playNext();
+});
 nextTrack.addEventListener('click', playNext);
 prevTrack.addEventListener('click', playPrev);
 randomTrack.addEventListener('click', playRandom);
