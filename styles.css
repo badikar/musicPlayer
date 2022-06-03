@@ -63,14 +63,19 @@ body {
   justify-content: space-around;
   align-items: center;
   margin: 1rem 0;
-  padding: 10px 0;
+  /* padding: 10px 0; */
   border-radius: 10px;
   border: solid 1px transparent;
   box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 8px, rgba(0, 0, 0, 0.05) 0px 5px 5px;
   background: #eeeeeb;
 }
+.buttons > div {
+  padding: 10px;
+}
 .active {
-  color: black;
+  background: #000;
+  border-radius: 50%;
+  color: #fff;
 }
 .repeat-track,
 .random-track,

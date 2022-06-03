@@ -15,9 +15,10 @@ const totalDuration = getEl('.total-duration');
 
 let trackIndex = 0;
 let isPlaying = false;
+let isRepeated = false;
 const track = document.createElement('audio');
 
-// Initial loaded song DOM info
+// Initial load track DOM info
 function loadTrack(index) {
   trackNumber.innerText = `Playing ${tracks[index].id} of ${tracks.length}`;
   trackName.innerText = tracks[index].title;
@@ -47,6 +48,16 @@ function playRandom() {
   loadTrack(trackIndex);
   playTrack();
 }
+function repeatOn() {
+  isRepeated = true;
+  track.loop = true;
+  repeatTrack.classList.add('active');
+}
+function repeatOff() {
+  isRepeated = false;
+  track.loop = false;
+  repeatTrack.classList.remove('active');
+}
 
 function pauseTrack() {
   playPause.children[0].classList.remove('fa-play-circle');
@@ -71,7 +82,13 @@ playPause.addEventListener('click', () => {
     playTrack();
   }
 });
-
+repeatTrack.addEventListener('click', () => {
+  if (!isRepeated) {
+    repeatOn();
+  } else {
+    repeatOff();
+  }
+});
 nextTrack.addEventListener('click', playNext);
 prevTrack.addEventListener('click', playPrev);
 randomTrack.addEventListener('click', playRandom);
