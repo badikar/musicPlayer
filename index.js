@@ -78,7 +78,6 @@ function playTrack() {
 window.addEventListener('DOMContentLoaded', loadTrack(trackIndex));
 
 playPause.addEventListener('click', () => {
-  const isPlaying = playPause.querySelector('.fa-play-circle');
   if (isPlaying) {
     pauseTrack();
   } else {
