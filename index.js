@@ -59,14 +59,14 @@ function repeatOff() {
 }
 
 function pauseTrack() {
-  playPause.children[0].classList.remove('fa-play-circle');
-  playPause.children[0].classList.add('fa-pause-circle');
+  playPause.children[0].classList.remove('fa-pause-circle');
+  playPause.children[0].classList.add('fa-play-circle');
   isPlaying = false;
   track.pause();
 }
 function playTrack() {
-  playPause.children[0].classList.remove('fa-pause-circle');
-  playPause.children[0].classList.add('fa-play-circle');
+  playPause.children[0].classList.remove('fa-play-circle');
+  playPause.children[0].classList.add('fa-pause-circle');
   isPlaying = true;
   track.play();
 }
