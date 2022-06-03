@@ -3,6 +3,9 @@ const tracks = [
   { id: 1, title: 'mango', mood: 'happy', src: './music/mango.mp3' },
   { id: 2, title: 'fryk', mood: 'friki', src: './music/fryk.mp3' },
   { id: 3, title: 'mel', mood: 'calm', src: './music/mel2.mp3' },
+  { id: 4, title: 'andy', mood: 'susp', src: './music/andy.mp3' },
+  { id: 5, title: 'felak', mood: 'groovy', src: './music/felak.mp3' },
+  { id: 6, title: 'huhy', mood: 'weird', src: './music/huhy.mp3' },
 ];
 // DOM helper function
 const getEl = (selection) => {
@@ -24,6 +27,7 @@ const repeatTrack = getEl('.repeat-track');
 const totalDuration = getEl('.total-duration');
 
 let trackIndex = 0;
+let isPlaying = false;
 const track = document.createElement('audio');
 
 // Initial loaded song DOM info
@@ -52,9 +56,7 @@ function playPrev() {
   playTrack();
 }
 function playRandom() {
-  console.log('ok');
   trackIndex = Math.floor(Math.random() * tracks.length);
-  console.log(trackIndex);
   loadTrack(trackIndex);
   playTrack();
 }
@@ -63,11 +65,13 @@ function pauseTrack() {
   playPause.children[0].classList.remove('fa-play-circle');
   playPause.children[0].classList.add('fa-pause-circle');
   track.pause();
+  isPlaying = false;
 }
 function playTrack() {
   playPause.children[0].classList.remove('fa-pause-circle');
   playPause.children[0].classList.add('fa-play-circle');
   track.play();
+  isPlaying = true;
 }
 
 // event listeners
