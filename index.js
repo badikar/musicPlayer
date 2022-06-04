@@ -18,6 +18,7 @@ let isPlaying = false;
 let isRepeated = false;
 const track = document.createElement('audio');
 // Initial load track DOM info
+// zeby zaladowac pozniej scr wstaw 2gi argument INXEX.SRC
 function loadTrack(index) {
   trackNumber.innerText = `Playing ${tracks[index].id} of ${tracks.length}`;
   trackName.innerText = tracks[index].title;
@@ -94,3 +95,10 @@ track.addEventListener('ended', () => {
 nextTrack.addEventListener('click', playNext);
 prevTrack.addEventListener('click', playPrev);
 randomTrack.addEventListener('click', playRandom);
+
+const volumeSlider = getEl('.volume-slider');
+volumeSlider.addEventListener('click', () => {
+  console.log('click');
+  console.log(volumeSlider.value);
+  track.volume = volumeSlider.value / 100;
+});
