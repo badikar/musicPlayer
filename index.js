@@ -98,7 +98,7 @@ randomTrack.addEventListener('click', playRandom);
 
 const volumeSlider = getEl('.volume-slider');
 volumeSlider.addEventListener('click', () => {
-  console.log('click');
+  console.log('click touch');
   console.log(volumeSlider.value);
   track.volume = volumeSlider.value / 100;
 });
