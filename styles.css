@@ -78,15 +78,18 @@ body {
 .prev-track,
 .next-track {
   opacity: 0.6;
-  transition: opacity 0.3s;
+  transition: opacity 0.2s;
 }
-.repeat-track:hover,
+.opacityChange {
+  opacity: 1;
+}
+/* .repeat-track:hover,
 .random-track:hover,
 .play-track:hover,
 .prev-track:hover,
 .next-track:hover {
   opacity: 1;
-}
+} */
 
 .slider-container {
   display: flex;

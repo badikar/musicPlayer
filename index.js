@@ -10,11 +10,15 @@ const randomTrack = getEl('.random-track');
 const prevTrack = getEl('.prev-track');
 const nextTrack = getEl('.next-track');
 const repeatTrack = getEl('.repeat-track');
-
 const volumeSlider = getEl('.volume-slider');
 const totalDuration = getEl('.total-duration');
 
+const buttons = getEl('.buttons');
+const buttonDivs = [...buttons.querySelectorAll('div')];
+console.log(buttonDivs);
+
 let trackIndex = 0;
+
 let isPlaying = false;
 let isRepeated = false;
 const track = document.createElement('audio');
@@ -74,7 +78,24 @@ function playTrack() {
   track.play();
 }
 
+function isTouchScreendevice() {
+  return 'ontouchstart' in window || navigator.maxTouchPoints;
+}
+isTouchScreendevice();
+
+if (!isTouchScreendevice()) {
+  buttonDivs.forEach((btn) => {
+    btn.addEventListener('pointerenter', () => {
+      btn.classList.add('opacityChange');
+    });
+    btn.addEventListener('pointerleave', () => {
+      btn.classList.remove('opacityChange');
+    });
+  });
+}
+
 // event listeners
+
 window.addEventListener('DOMContentLoaded', loadTrack(trackIndex));
 
 playPause.addEventListener('pointerup', () => {
