@@ -92,17 +92,17 @@ repeatTrack.addEventListener('click', () => {
 track.addEventListener('ended', () => {
   playNext();
 });
-nextTrack.addEventListener('pointerdown', playNext);
+nextTrack.addEventListener('pointerup', playNext);
 prevTrack.addEventListener('pointerup', playPrev);
-randomTrack.addEventListener('click', playRandom);
+randomTrack.addEventListener('pointerup', playRandom);
 
 const volumeSlider = getEl('.volume-slider');
-volumeSlider.addEventListener('mousemove', () => {
+volumeSlider.addEventListener('click', () => {
   console.log('pointer');
   console.log(volumeSlider.value);
   track.volume = volumeSlider.value / 100;
 });
-volumeSlider.addEventListener('touchmove', () => {
+volumeSlider.addEventListener('pointermove', () => {
   console.log('pointer');
   console.log(volumeSlider.value);
   track.volume = volumeSlider.value / 100;
