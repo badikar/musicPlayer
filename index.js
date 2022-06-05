@@ -97,8 +97,13 @@ prevTrack.addEventListener('pointerup', playPrev);
 randomTrack.addEventListener('click', playRandom);
 
 const volumeSlider = getEl('.volume-slider');
-volumeSlider.addEventListener('pointerdown', () => {
-  console.log('click touch');
+volumeSlider.addEventListener('mousemove', () => {
+  console.log('pointer');
+  console.log(volumeSlider.value);
+  track.volume = volumeSlider.value / 100;
+});
+volumeSlider.addEventListener('touchmove', () => {
+  console.log('pointer');
   console.log(volumeSlider.value);
   track.volume = volumeSlider.value / 100;
 });
