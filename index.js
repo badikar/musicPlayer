@@ -92,8 +92,8 @@ repeatTrack.addEventListener('click', () => {
 track.addEventListener('ended', () => {
   playNext();
 });
-nextTrack.addEventListener('click', playNext);
-prevTrack.addEventListener('click', playPrev);
+nextTrack.addEventListener('pointerdown', playNext);
+prevTrack.addEventListener('pointerup', playPrev);
 randomTrack.addEventListener('click', playRandom);
 
 const volumeSlider = getEl('.volume-slider');
