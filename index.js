@@ -11,6 +11,7 @@ const prevTrack = getEl('.prev-track');
 const nextTrack = getEl('.next-track');
 const repeatTrack = getEl('.repeat-track');
 
+const volumeSlider = getEl('.volume-slider');
 const totalDuration = getEl('.total-duration');
 
 let trackIndex = 0;
@@ -24,6 +25,7 @@ function loadTrack(index) {
   trackName.innerText = tracks[index].title;
   trackMood.innerText = tracks[index].mood;
   track.src = tracks[index].src;
+  track.volume = volumeSlider.value / 100;
 }
 
 function playNext() {
@@ -75,14 +77,14 @@ function playTrack() {
 // event listeners
 window.addEventListener('DOMContentLoaded', loadTrack(trackIndex));
 
-playPause.addEventListener('click', () => {
+playPause.addEventListener('pointerup', () => {
   if (isPlaying) {
     pauseTrack();
   } else {
     playTrack();
   }
 });
-repeatTrack.addEventListener('click', () => {
+repeatTrack.addEventListener('pointerup', () => {
   if (!isRepeated) {
     repeatOn();
   } else {
@@ -96,14 +98,9 @@ nextTrack.addEventListener('pointerup', playNext);
 prevTrack.addEventListener('pointerup', playPrev);
 randomTrack.addEventListener('pointerup', playRandom);
 
-const volumeSlider = getEl('.volume-slider');
 volumeSlider.addEventListener('pointerup', () => {
-  console.log('pointer');
-  console.log(volumeSlider.value);
   track.volume = volumeSlider.value / 100;
 });
 volumeSlider.addEventListener('pointermove', () => {
-  console.log('pointer');
-  console.log(volumeSlider.value);
   track.volume = volumeSlider.value / 100;
 });
