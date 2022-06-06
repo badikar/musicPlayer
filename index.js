@@ -131,7 +131,7 @@ function changeVolume() {
   volumeSlider.addEventListener('pointerup', () => {
     track.volume = volumeSlider.value / 100;
   });
-  volumeSlider.addEventListener('mousemove', () => {
+  volumeSlider.addEventListener('mousemover', () => {
     track.volume = volumeSlider.value / 100;
     console.log('ok');
   });
