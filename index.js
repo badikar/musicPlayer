@@ -30,7 +30,6 @@ function loadTrack(index) {
   trackMood.innerText = tracks[index].mood;
   track.src = tracks[index].src;
   console.log('oko');
-  changeVolume();
 }
 function addOpacity() {
   console.log(this);
@@ -126,13 +125,15 @@ nextTrack.addEventListener('click', playNext);
 prevTrack.addEventListener('click', playPrev);
 randomTrack.addEventListener('click', playRandom);
 
-function changeVolume() {
+track.volume = volumeSlider.value / 100;
+volumeSlider.addEventListener('pointerup', () => {
   track.volume = volumeSlider.value / 100;
-  volumeSlider.addEventListener('pointerup', () => {
-    track.volume = volumeSlider.value / 100;
-  });
-  volumeSlider.addEventListener('mousemover', () => {
-    track.volume = volumeSlider.value / 100;
-    console.log('ok');
-  });
-}
+});
+volumeSlider.addEventListener('mousemove', () => {
+  track.volume = volumeSlider.value / 100;
+  console.log('ok');
+});
+volumeSlider.addEventListener('pointermove', () => {
+  track.volume = volumeSlider.value / 100;
+  console.log('ok');
+});
