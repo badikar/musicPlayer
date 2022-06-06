@@ -29,7 +29,11 @@ function loadTrack(index) {
   trackName.innerText = tracks[index].title;
   trackMood.innerText = tracks[index].mood;
   track.src = tracks[index].src;
-  track.volume = volumeSlider.value / 100;
+  console.log('oko');
+  changeVolume();
+}
+function addOpacity() {
+  console.log(this);
 }
 
 function playNext() {
@@ -78,34 +82,35 @@ function playTrack() {
   track.play();
 }
 
-function isTouchScreendevice() {
-  return 'ontouchstart' in window || navigator.maxTouchPoints;
-}
-isTouchScreendevice();
+// important - to be used often
+// function isTouchScreendevice() {
+//   return 'ontouchstart' in window || navigator.maxTouchPoints;
+// }
 
-if (!isTouchScreendevice()) {
-  buttonDivs.forEach((btn) => {
-    btn.addEventListener('pointerenter', () => {
-      btn.classList.add('opacityChange');
-    });
-    btn.addEventListener('pointerleave', () => {
-      btn.classList.remove('opacityChange');
-    });
-  });
-}
+// if (!isTouchScreendevice()) {
+//   // alert('hohoh');
+//   buttonDivs.forEach((btn) => {
+//     btn.addEventListener('mouseenter', () => {
+//       btn.classList.add('opacityChange');
+//     });
+//     btn.addEventListener('mouseleave', () => {
+//       btn.classList.remove('opacityChange');
+//     });
+//   });
+// }
 
 // event listeners
 
 window.addEventListener('DOMContentLoaded', loadTrack(trackIndex));
 
-playPause.addEventListener('pointerup', () => {
+playPause.addEventListener('click', () => {
   if (isPlaying) {
     pauseTrack();
   } else {
     playTrack();
   }
 });
-repeatTrack.addEventListener('pointerup', () => {
+repeatTrack.addEventListener('click', () => {
   if (!isRepeated) {
     repeatOn();
   } else {
@@ -115,13 +120,19 @@ repeatTrack.addEventListener('pointerup', () => {
 track.addEventListener('ended', () => {
   playNext();
 });
-nextTrack.addEventListener('pointerup', playNext);
-prevTrack.addEventListener('pointerup', playPrev);
-randomTrack.addEventListener('pointerup', playRandom);
+nextTrack.addEventListener('click', playNext);
+nextTrack.addEventListener('click', playNext);
 
-volumeSlider.addEventListener('pointerup', () => {
+prevTrack.addEventListener('click', playPrev);
+randomTrack.addEventListener('click', playRandom);
+
+function changeVolume() {
   track.volume = volumeSlider.value / 100;
-});
-volumeSlider.addEventListener('pointermove', () => {
-  track.volume = volumeSlider.value / 100;
-});
+  volumeSlider.addEventListener('pointerup', () => {
+    track.volume = volumeSlider.value / 100;
+  });
+  volumeSlider.addEventListener('mousemove', () => {
+    track.volume = volumeSlider.value / 100;
+    console.log('ok');
+  });
+}

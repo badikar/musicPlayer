@@ -92,7 +92,7 @@ body {
   margin-top: 1rem;
 }
 .slider-container input {
-  touch-action: none;
+  /* touch-action: none; */
 }
 
 .current-time,
