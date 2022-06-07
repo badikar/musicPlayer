@@ -20,6 +20,7 @@ let trackIndex = 0;
 let isPlaying = false;
 let isRepeated = false;
 const track = document.createElement('audio');
+
 // Initial load track DOM info
 // zeby zaladowac pozniej scr wstaw 2gi argument INXEX.SRC
 const renderList = () => {
@@ -48,8 +49,13 @@ const renderList = () => {
       loadTrack(trackIndex);
       if (!isPlaying) {
         playTrack();
+        track.classList.add('track-active');
+        track.firstElementChild.classList.remove('fa-play-circle');
+        track.firstElementChild.classList.add('fa-pause-circle');
       } else {
         pauseTrack();
+        track.firstElementChild.classList.remove('fa-pause-circle');
+        track.firstElementChild.classList.add('fa-play-circle');
       }
     });
   });
