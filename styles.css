@@ -115,6 +115,33 @@ i.fa-step-backward {
   width: 40%;
 }
 
+.list-track-info {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border: solid 1px black;
+  border-radius: 5px;
+}
+.list-track-info i {
+  display: none;
+}
+
+.track-active {
+  background: #eeeeeb;
+}
+.track-active i {
+  display: block;
+  font-size: 22px;
+  opacity: 0.6;
+  transition: 0.2s ease-in;
+}
+.track-active i:hover {
+  opacity: 1;
+  scale: 1.1;
+}
+
 /* input-range  generator:https://www.cssportal.com/style-input-range/ */
 input {
   -webkit-appearance: none;

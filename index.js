@@ -13,9 +13,8 @@ const repeatTrack = getEl('.repeat-track');
 const volumeSlider = getEl('.volume-slider');
 const totalDuration = getEl('.total-duration');
 
-const buttons = getEl('.buttons');
-const buttonDivs = [...buttons.querySelectorAll('div')];
-console.log(buttonDivs);
+const trackListDOM = getEl('.list');
+// const listTrackInfo = getEl('./');
 
 let trackIndex = 0;
 
@@ -24,17 +23,41 @@ let isRepeated = false;
 const track = document.createElement('audio');
 // Initial load track DOM info
 // zeby zaladowac pozniej scr wstaw 2gi argument INXEX.SRC
+const renderList = () => {
+  const trackList = tracks
+    .map((track) => {
+      const { title, mood } = track;
+      return `
+      <article class="list-track-info track-active">
+      <i class="fa fa-play-circle"></i>
+      <p>${title}</p>
+      <p># ${mood}</p>
+      <p>35s</p>
+  </article>
+      `;
+    })
+    .join('');
+  trackListDOM.innerHTML = trackList;
+};
+
+const start = () => {
+  console.log('start');
+  renderList();
+  loadTrack(trackIndex);
+};
+
 function loadTrack(index) {
   trackNumber.innerText = `Playing ${tracks[index].id} of ${tracks.length}`;
   trackName.innerText = tracks[index].title;
   trackMood.innerText = tracks[index].mood;
   track.src = tracks[index].src;
-  console.log('oko');
 }
+
 function addOpacity() {
   console.log(this);
 }
 
+// player buttons functionality
 function playNext() {
   trackIndex++;
   if (trackIndex > tracks.length - 1) {
@@ -81,6 +104,10 @@ function playTrack() {
   track.play();
 }
 
+// const buttons = getEl('.buttons');
+// const buttonDivs = [...buttons.querySelectorAll('div')];
+// console.log(buttonDivs);
+
 // important - to be used often
 // function isTouchScreendevice() {
 //   return 'ontouchstart' in window || navigator.maxTouchPoints;
@@ -100,7 +127,8 @@ function playTrack() {
 
 // event listeners
 
-window.addEventListener('DOMContentLoaded', loadTrack(trackIndex));
+// window.addEventListener('DOMContentLoaded', trackListRender);
+window.addEventListener('DOMContentLoaded', start);
 
 playPause.addEventListener('click', () => {
   if (isPlaying) {
@@ -125,15 +153,14 @@ nextTrack.addEventListener('click', playNext);
 prevTrack.addEventListener('click', playPrev);
 randomTrack.addEventListener('click', playRandom);
 
+// volume events
 track.volume = volumeSlider.value / 100;
 volumeSlider.addEventListener('pointerup', () => {
   track.volume = volumeSlider.value / 100;
 });
 volumeSlider.addEventListener('mousemove', () => {
   track.volume = volumeSlider.value / 100;
-  console.log('ok');
 });
 volumeSlider.addEventListener('pointermove', () => {
   track.volume = volumeSlider.value / 100;
-  console.log('ok');
 });
