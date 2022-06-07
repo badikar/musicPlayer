@@ -14,7 +14,6 @@ const volumeSlider = getEl('.volume-slider');
 const totalDuration = getEl('.total-duration');
 
 const trackListDOM = getEl('.list');
-// const listTrackInfo = getEl('./');
 
 let trackIndex = 0;
 
@@ -26,9 +25,9 @@ const track = document.createElement('audio');
 const renderList = () => {
   const trackList = tracks
     .map((track) => {
-      const { title, mood } = track;
+      const { title, mood, id } = track;
       return `
-      <article class="list-track-info track-active">
+      <article class="list-track-info" data-id="${id}">
       <i class="fa fa-play-circle"></i>
       <p>${title}</p>
       <p># ${mood}</p>
@@ -38,12 +37,28 @@ const renderList = () => {
     })
     .join('');
   trackListDOM.innerHTML = trackList;
+
+  const listTrackInfo = [...document.querySelectorAll('.list-track-info')];
+  console.log(listTrackInfo);
+  listTrackInfo.forEach((track) => {
+    track.addEventListener('click', (e) => {
+      const selected = e.currentTarget.dataset.id;
+      trackIndex = selected - 1;
+      console.log(trackIndex);
+      loadTrack(trackIndex);
+      if (!isPlaying) {
+        playTrack();
+      } else {
+        pauseTrack();
+      }
+    });
+  });
 };
 
 const start = () => {
   console.log('start');
-  renderList();
   loadTrack(trackIndex);
+  renderList();
 };
 
 function loadTrack(index) {
@@ -78,7 +93,7 @@ function playPrev() {
 function playRandom() {
   trackIndex = Math.floor(Math.random() * tracks.length);
   loadTrack(trackIndex);
-  playTrack();
+  track.play();
 }
 function repeatOn() {
   isRepeated = true;

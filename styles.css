@@ -92,7 +92,7 @@ body {
   margin-top: 1rem;
 }
 .slider-container input {
-  /* touch-action: none; */
+  touch-action: none;
 }
 
 .current-time,
@@ -121,15 +121,13 @@ i.fa-step-backward {
   justify-content: space-between;
   align-items: center;
   padding: 10px;
-  border: solid 1px black;
   border-radius: 5px;
-}
-.list-track-info i {
-  display: none;
 }
 
 .track-active {
+  border: solid 1px transparent;
   background: #eeeeeb;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 8px, rgba(0, 0, 0, 0.05) 0px 5px 5px;
 }
 .track-active i {
   display: block;
