@@ -12,6 +12,7 @@ const nextTrack = getEl('.next-track');
 const repeatTrack = getEl('.repeat-track');
 const volumeSlider = getEl('.volume-slider');
 const seekSlider = getEl('.seek-slider');
+const currentTimeDOM = getEl('.current-time');
 const totalDuration = getEl('.total-duration');
 
 const trackListDOM = getEl('.list');
@@ -24,16 +25,26 @@ let track = document.createElement('audio');
 
 // Initial load track DOM info
 // zeby zaladowac pozniej scr wstaw 2gi argument INXEX.SRC
+function loadTrack(index) {
+  trackNumber.innerText = `Playing ${tracks[index].id} of ${tracks.length}`;
+  trackName.innerText = tracks[index].title;
+  trackMood.innerText = tracks[index].mood;
+  track.src = tracks[index].src;
+  track.setAttribute('preload', 'metadata');
+  track.onloadedmetadata = function () {
+    totalDuration.innerText = `00:${Math.floor(track.duration)}`;
+  };
+}
 const renderList = () => {
   const trackList = tracks
     .map((track) => {
-      const { title, mood, id, duration } = track;
+      const { title, mood, id } = track;
       return `
     <article class="list-track-info" data-id="${id}">
     <i class="fa fa-play-circle"></i>
     <p>${title}</p>
     <p># ${mood}</p>
-    <small>${duration} sec</small>
+    <small>fix...</small>
     </article>
     `;
     })
@@ -70,19 +81,6 @@ const start = () => {
   renderList();
   loadTrack(trackIndex);
 };
-
-function loadTrack(index) {
-  trackNumber.innerText = `Playing ${tracks[index].id} of ${tracks.length}`;
-  trackName.innerText = tracks[index].title;
-  trackMood.innerText = tracks[index].mood;
-  track.src = tracks[index].src;
-  track.setAttribute('preload', 'metadata');
-  console.log(track.preload);
-  track.onloadedmetadata = function () {
-    console.log(track.duration);
-    totalDuration.innerText = `00:${track.duration}`;
-  };
-}
 
 function addOpacity() {
   console.log(this);
@@ -197,8 +195,17 @@ volumeSlider.addEventListener('pointermove', () => {
 
 function updateProgress(e) {
   const { duration, currentTime } = e.target;
-  console.log(currentTime);
+  currentTimeDOM.innerText = `00:${Math.floor(currentTime)}`;
+  const timeProgress = (currentTime / duration) * 1000;
+  seekSlider.value = timeProgress;
+}
+
+function setProgress() {
+  e = ((track.currentTime + 1) / track.duration) * 1000;
+  console.log(seekSlider.value);
 }
 
 // duration slider
 track.addEventListener('timeupdate', updateProgress);
+
+seekSlider.addEventListener('click', setProgress);
