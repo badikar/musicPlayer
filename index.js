@@ -11,6 +11,7 @@ const prevTrack = getEl('.prev-track');
 const nextTrack = getEl('.next-track');
 const repeatTrack = getEl('.repeat-track');
 const volumeSlider = getEl('.volume-slider');
+const seekSlider = getEl('.seek-slider');
 const totalDuration = getEl('.total-duration');
 
 const trackListDOM = getEl('.list');
@@ -19,22 +20,22 @@ let trackIndex = 0;
 
 let isPlaying = false;
 let isRepeated = false;
-const track = document.createElement('audio');
+let track = document.createElement('audio');
 
 // Initial load track DOM info
 // zeby zaladowac pozniej scr wstaw 2gi argument INXEX.SRC
 const renderList = () => {
   const trackList = tracks
     .map((track) => {
-      const { title, mood, id } = track;
+      const { title, mood, id, duration } = track;
       return `
-      <article class="list-track-info" data-id="${id}">
-      <i class="fa fa-play-circle"></i>
-      <p>${title}</p>
-      <p># ${mood}</p>
-      <p>35s</p>
-  </article>
-      `;
+    <article class="list-track-info" data-id="${id}">
+    <i class="fa fa-play-circle"></i>
+    <p>${title}</p>
+    <p># ${mood}</p>
+    <small>${duration} sec</small>
+    </article>
+    `;
     })
     .join('');
   trackListDOM.innerHTML = trackList;
@@ -46,10 +47,11 @@ const renderList = () => {
       const selected = e.currentTarget.dataset.id;
       trackIndex = selected - 1;
       console.log(trackIndex);
+      // if(selected !==)
       loadTrack(trackIndex);
+      track.classList.add('track-active');
       if (!isPlaying) {
         playTrack();
-        track.classList.add('track-active');
         track.firstElementChild.classList.remove('fa-play-circle');
         track.firstElementChild.classList.add('fa-pause-circle');
       } else {
@@ -57,14 +59,16 @@ const renderList = () => {
         track.firstElementChild.classList.remove('fa-pause-circle');
         track.firstElementChild.classList.add('fa-play-circle');
       }
+
+      totalDuration.innerHTML = track.duration;
     });
   });
 };
 
 const start = () => {
   console.log('start');
-  loadTrack(trackIndex);
   renderList();
+  loadTrack(trackIndex);
 };
 
 function loadTrack(index) {
@@ -72,6 +76,12 @@ function loadTrack(index) {
   trackName.innerText = tracks[index].title;
   trackMood.innerText = tracks[index].mood;
   track.src = tracks[index].src;
+  track.setAttribute('preload', 'metadata');
+  console.log(track.preload);
+  track.onloadedmetadata = function () {
+    console.log(track.duration);
+    totalDuration.innerText = `00:${track.duration}`;
+  };
 }
 
 function addOpacity() {
@@ -148,7 +158,6 @@ function playTrack() {
 
 // event listeners
 
-// window.addEventListener('DOMContentLoaded', trackListRender);
 window.addEventListener('DOMContentLoaded', start);
 
 playPause.addEventListener('click', () => {
@@ -174,7 +183,7 @@ nextTrack.addEventListener('click', playNext);
 prevTrack.addEventListener('click', playPrev);
 randomTrack.addEventListener('click', playRandom);
 
-// volume events
+// volume slider
 track.volume = volumeSlider.value / 100;
 volumeSlider.addEventListener('pointerup', () => {
   track.volume = volumeSlider.value / 100;
@@ -185,3 +194,11 @@ volumeSlider.addEventListener('mousemove', () => {
 volumeSlider.addEventListener('pointermove', () => {
   track.volume = volumeSlider.value / 100;
 });
+
+function updateProgress(e) {
+  const { duration, currentTime } = e.target;
+  console.log(currentTime);
+}
+
+// duration slider
+track.addEventListener('timeupdate', updateProgress);
