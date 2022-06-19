@@ -201,8 +201,8 @@ function updateProgress(e) {
 }
 
 function setProgress() {
-  e = ((track.currentTime + 1) / track.duration) * 1000;
-  console.log(seekSlider.value);
+  const duration = track.duration;
+  track.currentTime = (seekSlider.value / 1000) * duration;
 }
 
 // duration slider
