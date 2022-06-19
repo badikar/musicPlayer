@@ -25,14 +25,6 @@ let track = document.createElement('audio');
 
 // Initial load track DOM info
 // zeby zaladowac pozniej scr wstaw 2gi argument INXEX.SRC
-function listPlay() {
-  isPlaying = true;
-  track.play();
-}
-function listPause() {
-  isPlaying = false;
-  track.pause();
-}
 
 function loadTrack(index) {
   trackNumber.innerText = `Playing ${tracks[index].id} of ${tracks.length}`;
@@ -72,33 +64,18 @@ const renderList = () => {
       const selected = e.currentTarget.dataset.id;
       trackIndex = selected - 1;
       console.log(trackIndex);
-      // if(selected !==)
       loadTrack(trackIndex);
       song.classList.add('track-active');
       track.play();
-
-      // if (!isPlaying) {
-      //   playTrack();
-      //   track.firstElementChild.classList.remove('fa-play-circle');
-      //   track.firstElementChild.classList.add('fa-pause-circle');
-      // } else {
-      //   pauseTrack();
-      //   track.firstElementChild.classList.remove('fa-pause-circle');
-      //   track.firstElementChild.classList.add('fa-play-circle');
-      // }
     });
   });
 };
 
 const start = () => {
   console.log('start');
-  // loadTrack(trackIndex);
+  loadTrack(trackIndex);
   renderList();
 };
-
-// function addOpacity() {
-//   console.log(this);
-// }
 
 // player buttons functionality
 function playNext() {
@@ -146,27 +123,6 @@ function playTrack() {
   isPlaying = true;
   track.play();
 }
-
-// const buttons = getEl('.buttons');
-// const buttonDivs = [...buttons.querySelectorAll('div')];
-// console.log(buttonDivs);
-
-// important - to be used often
-// function isTouchScreendevice() {
-//   return 'ontouchstart' in window || navigator.maxTouchPoints;
-// }
-
-// if (!isTouchScreendevice()) {
-//   // alert('hohoh');
-//   buttonDivs.forEach((btn) => {
-//     btn.addEventListener('mouseenter', () => {
-//       btn.classList.add('opacityChange');
-//     });
-//     btn.addEventListener('mouseleave', () => {
-//       btn.classList.remove('opacityChange');
-//     });
-//   });
-// }
 
 // event listeners
 
@@ -221,5 +177,4 @@ function setProgress() {
 
 // duration slider
 track.addEventListener('timeupdate', updateProgress);
-
-seekSlider.addEventListener('click', setProgress);
+seekSlider.addEventListener('pointermove', setProgress);
