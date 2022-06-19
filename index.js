@@ -33,7 +33,7 @@ function loadTrack(index) {
   track.src = tracks[index].src;
   track.setAttribute('preload', 'metadata');
   track.onloadedmetadata = function () {
-    totalDuration.innerText = `00:${Math.floor(track.duration)}`;
+    totalDuration.innerText = timeDisplay(track.duration);
   };
 }
 const renderList = () => {
@@ -54,7 +54,6 @@ const renderList = () => {
 
   const listTrackInfo = [...document.querySelectorAll('.list-track-info')];
   listTrackInfo.forEach((song) => {
-    console.log(song);
     song.addEventListener('click', (e) => {
       listTrackInfo.forEach((tjun) => {
         tjun.classList.remove('track-active');
@@ -72,9 +71,9 @@ const renderList = () => {
 };
 
 const start = () => {
-  console.log('start');
-  loadTrack(trackIndex);
   renderList();
+  loadTrack(trackIndex);
+  console.log('start');
 };
 
 // player buttons functionality
@@ -163,9 +162,10 @@ volumeSlider.addEventListener('pointermove', () => {
   track.volume = volumeSlider.value / 100;
 });
 
+// ********************************
 function updateProgress(e) {
   const { duration, currentTime } = e.target;
-  currentTimeDOM.innerText = `00:${Math.floor(currentTime)}`;
+  currentTimeDOM.innerText = timeDisplay(currentTime);
   const timeProgress = (currentTime / duration) * 1000;
   seekSlider.value = timeProgress;
 }
@@ -173,6 +173,15 @@ function updateProgress(e) {
 function setProgress() {
   const duration = track.duration;
   track.currentTime = (seekSlider.value / 1000) * duration;
+}
+
+// all audio tracks < 1min so used quicker way
+function timeDisplay(value) {
+  if (value < 10) {
+    return `00:0${Math.floor(value)}`;
+  } else {
+    return `00:${Math.floor(value)}`;
+  }
 }
 
 // duration slider
