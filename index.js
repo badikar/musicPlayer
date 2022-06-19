@@ -25,6 +25,15 @@ let track = document.createElement('audio');
 
 // Initial load track DOM info
 // zeby zaladowac pozniej scr wstaw 2gi argument INXEX.SRC
+function listPlay() {
+  isPlaying = true;
+  track.play();
+}
+function listPause() {
+  isPlaying = false;
+  track.pause();
+}
+
 function loadTrack(index) {
   trackNumber.innerText = `Playing ${tracks[index].id} of ${tracks.length}`;
   trackName.innerText = tracks[index].title;
@@ -52,39 +61,44 @@ const renderList = () => {
   trackListDOM.innerHTML = trackList;
 
   const listTrackInfo = [...document.querySelectorAll('.list-track-info')];
-  console.log(listTrackInfo);
-  listTrackInfo.forEach((track) => {
-    track.addEventListener('click', (e) => {
+  listTrackInfo.forEach((song) => {
+    console.log(song);
+    song.addEventListener('click', (e) => {
+      listTrackInfo.forEach((tjun) => {
+        tjun.classList.remove('track-active');
+        tjun.firstElementChild.classList.remove('fa-pause-circle');
+        tjun.firstElementChild.classList.add('fa-play-circle');
+      });
       const selected = e.currentTarget.dataset.id;
       trackIndex = selected - 1;
       console.log(trackIndex);
       // if(selected !==)
       loadTrack(trackIndex);
-      track.classList.add('track-active');
-      if (!isPlaying) {
-        playTrack();
-        track.firstElementChild.classList.remove('fa-play-circle');
-        track.firstElementChild.classList.add('fa-pause-circle');
-      } else {
-        pauseTrack();
-        track.firstElementChild.classList.remove('fa-pause-circle');
-        track.firstElementChild.classList.add('fa-play-circle');
-      }
+      song.classList.add('track-active');
+      track.play();
 
-      totalDuration.innerHTML = track.duration;
+      // if (!isPlaying) {
+      //   playTrack();
+      //   track.firstElementChild.classList.remove('fa-play-circle');
+      //   track.firstElementChild.classList.add('fa-pause-circle');
+      // } else {
+      //   pauseTrack();
+      //   track.firstElementChild.classList.remove('fa-pause-circle');
+      //   track.firstElementChild.classList.add('fa-play-circle');
+      // }
     });
   });
 };
 
 const start = () => {
   console.log('start');
+  // loadTrack(trackIndex);
   renderList();
-  loadTrack(trackIndex);
 };
 
-function addOpacity() {
-  console.log(this);
-}
+// function addOpacity() {
+//   console.log(this);
+// }
 
 // player buttons functionality
 function playNext() {
