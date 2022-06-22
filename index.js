@@ -15,7 +15,7 @@ const seekSlider = getEl('.seek-slider');
 const currentTimeDOM = getEl('.current-time');
 const totalDuration = getEl('.total-duration');
 
-const trackListDOM = getEl('.list');
+const listDOM = getEl('.list');
 
 let trackIndex = 0;
 
@@ -38,8 +38,8 @@ function loadTrack(index) {
 }
 const renderList = () => {
   const trackList = tracks
-    .map((track) => {
-      const { title, mood, id } = track;
+    .map((singleTrack) => {
+      const { title, mood, id } = singleTrack;
       return `
     <article class="list-track-info" data-id="${id}">
     <i class="fa fa-play-circle"></i>
@@ -50,32 +50,68 @@ const renderList = () => {
     `;
     })
     .join('');
-  trackListDOM.innerHTML = trackList;
+  listDOM.innerHTML = trackList;
+};
+
+// const listTrackInfo = [...document.querySelectorAll('.list-track-info')];
+// console.log(listTrackInfo);
+
+// listTrackInfo.forEach((song) => {
+//   console.log(song);
+
+//   song.addEventListener('click', (e) => {
+//     listTrackInfo.forEach((tjun) => {
+//       tjun.classList.remove('track-active');
+//       tjun.firstElementChild.classList.remove('fa-pause-circle');
+//       tjun.firstElementChild.classList.add('fa-play-circle');
+//     });
+//     const selected = e.currentTarget.dataset.id;
+//     trackIndex = selected - 1;
+//     console.log(trackIndex);
+//     loadTrack(trackIndex);
+//     song.classList.add('track-active');
+//     track.play();
+//   });
+// });
+
+const start = () => {
+  loadTrack(trackIndex);
+  renderList();
 
   const listTrackInfo = [...document.querySelectorAll('.list-track-info')];
+  console.log(listTrackInfo);
   listTrackInfo.forEach((song) => {
+    console.log(song);
+
     song.addEventListener('click', (e) => {
       listTrackInfo.forEach((tjun) => {
         tjun.classList.remove('track-active');
         tjun.firstElementChild.classList.remove('fa-pause-circle');
         tjun.firstElementChild.classList.add('fa-play-circle');
       });
+
       const selected = e.currentTarget.dataset.id;
       trackIndex = selected - 1;
       console.log(trackIndex);
       loadTrack(trackIndex);
       song.classList.add('track-active');
-      track.play();
+      track.load();
+      if (isPlaying) {
+        pauseTrack();
+      } else {
+        playTrack();
+      }
     });
+
+    // song.addEventListener('click', (e) => {
+    //   listTrackInfo.forEach((tjun) => {
+    //     tjun.classList.remove('track-active');
+    //     tjun.firstElementChild.classList.remove('fa-pause-circle');
+    //     tjun.firstElementChild.classList.add('fa-play-circle');
+    //   });
+    // });
   });
 };
-
-const start = () => {
-  renderList();
-  loadTrack(trackIndex);
-  console.log('start');
-};
-
 // player buttons functionality
 function playNext() {
   trackIndex++;
@@ -116,11 +152,16 @@ function pauseTrack() {
   isPlaying = false;
   track.pause();
 }
-function playTrack() {
-  playPause.children[0].classList.remove('fa-play-circle');
-  playPause.children[0].classList.add('fa-pause-circle');
-  isPlaying = true;
-  track.play();
+async function playTrack() {
+  try {
+    await track.play();
+    isPlaying = true;
+    playPause.children[0].classList.remove('fa-play-circle');
+    playPause.children[0].classList.add('fa-pause-circle');
+  } catch (err) {
+    console.log('blad');
+    playPause.children[0].classList.remove('fa-pause-circle');
+  }
 }
 
 // event listeners
@@ -163,6 +204,7 @@ volumeSlider.addEventListener('pointermove', () => {
 });
 
 // ********************************
+
 function updateProgress(e) {
   const { duration, currentTime } = e.target;
   currentTimeDOM.innerText = timeDisplay(currentTime);
