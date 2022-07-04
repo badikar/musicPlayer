@@ -74,16 +74,16 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 3rem;
-  aspect-ratio: 1 /1;
   /* border: solid 1px black; */
+  padding: 0 14px;
 }
 .buttons > button > i {
   /* border: dotted 1px black; */
   font-size: 24px;
 }
 .buttons .play-track i {
-  font-size: 56px;
+  font-size: 60px;
+  padding: 0;
 }
 
 .buttons button.active {
@@ -101,22 +101,11 @@ body {
   transition: opacity 0.2s;
 }
 
-.slider-container {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  margin-top: 1rem;
-}
-.slider-container input {
-  touch-action: none;
-}
-
 .current-time,
 .total-duration,
 i.fa-volume-down,
 i.fa-volume-up {
-  padding: 8px 6px;
+  padding: 0.5rem;
   opacity: 0.7;
 }
 i,
@@ -127,13 +116,27 @@ i.fa-step-backward {
   cursor: pointer;
 }
 
+.list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .list-track-info {
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
   align-items: center;
-  padding: 10px;
+  width: 85%;
+  padding: 0.5rem;
+  gap: 0.75rem;
   border-radius: 5px;
+}
+.list-track-info i {
+  font-size: 1rem;
+}
+.list-track-info .song-title {
+  display: flex;
+  width: 200px;
+  padding-left: 4rem;
 }
 
 .track-active {
@@ -141,6 +144,7 @@ i.fa-step-backward {
   background: #eeeeeb;
   box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 8px, rgba(0, 0, 0, 0.05) 0px 5px 5px;
 }
+
 .track-active i {
   display: block;
   font-size: 22px;

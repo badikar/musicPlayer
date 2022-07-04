@@ -43,8 +43,8 @@ const renderList = () => {
       return `
     <article class="list-track-info" data-id="${id}">
     <i class="fa fa-play-circle"></i>
-    <p>${title}</p>
-    <p># ${mood}</p>
+    <p class="song-title">${title}</p>
+    <p class="song-mood"># ${mood}</p>
     </article>
     `;
     })
