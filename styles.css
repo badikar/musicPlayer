@@ -13,61 +13,55 @@ body {
   color: rgb(0, 0, 0);
 }
 .music-player {
-  height: auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  display: grid;
+  place-items: center;
 }
-.music-player h2 {
-  text-align: center;
-}
+
 .container {
   width: 90vw;
   max-width: 480px;
-  background: #f3f5eb;
-  border: solid 1px transparent;
+  background: #e5ead4;
   padding: 1rem;
-  border-radius: 20px;
+  border-radius: 1rem;
   box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
 }
-.details {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-.img-container {
+.player-img-container {
   display: flex;
   flex-direction: row;
   justify-content: center;
 }
-.img {
+.player-img {
   width: 85%;
   text-align: center;
   display: block;
   object-fit: cover;
   background: #eeeeeb;
-  padding: 10px;
-  border: solid 1px transparent;
-  border-radius: 10px;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
   box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 8px, rgba(0, 0, 0, 0.05) 0px 5px 5px;
   margin: 1rem 0;
 }
+.player-details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
 .track-name {
-  margin: 10px 0;
-  font-size: 2rem;
+  margin: 0.5rem 0;
+  font-size: 1.75rem;
+  font-weight: lighter;
 }
 
-.buttons {
+.navigation-btns {
   display: flex;
   justify-content: space-around;
   margin: 1rem 0;
-  border-radius: 10px;
+  border-radius: 0.5rem;
   box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 8px, rgba(0, 0, 0, 0.05) 0px 5px 5px;
   background: #eeeeeb;
 }
-.buttons > button {
+.navigation-btns > button {
   background: transparent;
   border: none;
   display: flex;
@@ -77,15 +71,15 @@ body {
   /* border: solid 1px black; */
   aspect-ratio: 1/1;
 }
-.buttons > button > i {
+.navigation-btns > button > i {
   /* border: dotted 1px black; */
   font-size: 22px;
 }
 
-.buttons .play-track i {
+.navigation-btns .play-track i {
   font-size: 48px;
 }
-.buttons button.active {
+.navigation-btns button.active {
   border-radius: 50%;
   background: rgb(22, 22, 22);
   color: white;
@@ -105,7 +99,7 @@ body {
 i.fa-volume-down,
 i.fa-volume-up {
   padding: 0.5rem;
-  opacity: 0.7;
+  opacity: 0.8;
 }
 i,
 i.fa-play-circle,
