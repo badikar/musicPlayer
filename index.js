@@ -11,7 +11,7 @@ const prevTrack = getEl('.prev-track');
 const nextTrack = getEl('.next-track');
 const repeatTrack = getEl('.repeat-track');
 const volumeSlider = getEl('.volume-slider');
-const seekSlider = getEl('.seek-slider');
+// const seekSlider = getEl('.seek-slider');
 const currentTimeDOM = getEl('.current-time');
 const totalDuration = getEl('.total-duration');
 
@@ -90,17 +90,12 @@ const start = () => {
         tjun.firstElementChild.classList.add('fa-play-circle');
       });
 
+      track.paused ? track.play() : track.pause();
       const selected = e.currentTarget.dataset.id;
       trackIndex = selected - 1;
       console.log(trackIndex);
       loadTrack(trackIndex);
       song.classList.add('track-active');
-      track.load();
-      if (isPlaying) {
-        pauseTrack();
-      } else {
-        playTrack();
-      }
     });
 
     // song.addEventListener('click', (e) => {
@@ -192,29 +187,41 @@ prevTrack.addEventListener('click', playPrev);
 randomTrack.addEventListener('click', playRandom);
 
 // volume slider
-track.volume = volumeSlider.value / 100;
-volumeSlider.addEventListener('pointerup', () => {
-  track.volume = volumeSlider.value / 100;
-});
-volumeSlider.addEventListener('mousemove', () => {
-  track.volume = volumeSlider.value / 100;
-});
-volumeSlider.addEventListener('pointermove', () => {
-  track.volume = volumeSlider.value / 100;
-});
+// track.volume = volumeSlider.value / 100;
+// volumeSlider.addEventListener('pointerup', () => {
+//   track.volume = volumeSlider.value / 100;
+// });
+// volumeSlider.addEventListener('mousemove', () => {
+//   track.volume = volumeSlider.value / 100;
+// });
+// volumeSlider.addEventListener('pointermove', () => {
+//   track.volume = volumeSlider.value / 100;
+// });
 
 // ********************************
 
-function updateProgress(e) {
-  const { duration, currentTime } = e.target;
-  currentTimeDOM.innerText = timeDisplay(currentTime);
-  const timeProgress = (currentTime / duration) * 1000;
-  seekSlider.value = timeProgress;
+const timelineContainer = getEl('.timeline-container');
+
+timelineContainer.addEventListener('pointermove', updateTimeline);
+timelineContainer.addEventListener('pointerdown', updateTimeline);
+timelineContainer.addEventListener('touchmove', updateTimeline);
+
+function updateTimeline(e) {
+  if (e.buttons & (1 === 1)) {
+    const rect = timelineContainer.getBoundingClientRect();
+    console.log(rect.width);
+    const percent = Math.min(Math.max(0, e.x - rect.x), rect.width) / rect.width;
+    timelineContainer.style.setProperty('--progres-position', percent);
+    track.currentTime = percent * track.duration;
+  }
 }
 
-function setProgress() {
-  const duration = track.duration;
-  track.currentTime = (seekSlider.value / 1000) * duration;
+function updateProgress() {
+  const percent = track.currentTime / track.duration;
+  // console.log(percent);
+  timelineContainer.style.setProperty('--progres-position', percent);
+
+  currentTimeDOM.innerText = timeDisplay(track.currentTime);
 }
 
 // all audio tracks < 1min so used quicker way
@@ -228,4 +235,23 @@ function timeDisplay(value) {
 
 // duration slider
 track.addEventListener('timeupdate', updateProgress);
-seekSlider.addEventListener('pointermove', setProgress);
+// seekSlider.addEventListener('pointermove', setProgress);
+track.addEventListener('timeupdate', updateProgress);
+
+const volumeSliderContainer = getEl('.volume-slider-container');
+
+function setVolume(e) {
+  if (e.buttons & (1 === 1)) {
+    const rect = volumeSliderContainer.getBoundingClientRect();
+    console.log(rect.width);
+    const percent = Math.min(Math.max(0, e.x - rect.x), rect.width) / rect.width;
+
+    volumeSliderContainer.style.setProperty('--progres-position', percent);
+    track.volume = percent;
+    console.log(percent);
+  }
+}
+
+volumeSliderContainer.addEventListener('pointermove', setVolume);
+volumeSliderContainer.addEventListener('pointerdown', setVolume);
+volumeSliderContainer.addEventListener('touchmove', setVolume);
