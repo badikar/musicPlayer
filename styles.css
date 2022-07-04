@@ -61,12 +61,11 @@ body {
 
 .buttons {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-around;
   margin: 1rem 0;
   border-radius: 10px;
   box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 8px, rgba(0, 0, 0, 0.05) 0px 5px 5px;
   background: #eeeeeb;
-  padding: 0.75rem;
 }
 .buttons > button {
   background: transparent;
@@ -74,18 +73,18 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  align-self: center;
   /* border: solid 1px black; */
-  padding: 0 14px;
+  aspect-ratio: 1/1;
 }
 .buttons > button > i {
   /* border: dotted 1px black; */
-  font-size: 24px;
-}
-.buttons .play-track i {
-  font-size: 60px;
-  padding: 0;
+  font-size: 22px;
 }
 
+.buttons .play-track i {
+  font-size: 48px;
+}
 .buttons button.active {
   border-radius: 50%;
   background: rgb(22, 22, 22);
@@ -120,9 +119,11 @@ i.fa-step-backward {
   display: flex;
   flex-direction: column;
   align-items: center;
+  /* border: solid 1px red; */
 }
 
 .list-track-info {
+  /* border: solid 1px red; */
   display: flex;
   align-items: center;
   width: 85%;
@@ -131,12 +132,11 @@ i.fa-step-backward {
   border-radius: 5px;
 }
 .list-track-info i {
+  width: 25%;
   font-size: 1rem;
 }
 .list-track-info .song-title {
-  display: flex;
-  width: 200px;
-  padding-left: 4rem;
+  width: 35%;
 }
 
 .track-active {
