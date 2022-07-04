@@ -33,7 +33,7 @@ function loadTrack(index) {
   track.src = tracks[index].src;
   track.setAttribute('preload', 'metadata');
   track.onloadedmetadata = function () {
-    totalDuration.innerText = timeDisplay(track.duration);
+    totalDuration.innerText = formatDuration(track.duration);
   };
 }
 const renderList = () => {
@@ -250,3 +250,21 @@ function setVolume(e) {
 volumeSliderContainer.addEventListener('pointermove', setVolume);
 volumeSliderContainer.addEventListener('pointerdown', setVolume);
 volumeSliderContainer.addEventListener('touchmove', setVolume);
+
+// total duration
+const leadingZeroFormatter = new Intl.NumberFormat(undefined, {
+  minimumIntegerDigits: 2,
+});
+
+function formatDuration(time) {
+  const seconds = Math.floor(time % 60);
+  const minutes = Math.floor(time / 60) % 60;
+  const hours = Math.floor(time / 3600);
+  if (hours === 0) {
+    return `${minutes}:${leadingZeroFormatter.format(seconds)}`;
+  } else {
+    return `${hours}:${leadingZeroFormatter.format(minutes)}:${leadingZeroFormatter.format(
+      seconds
+    )}`;
+  }
+}
