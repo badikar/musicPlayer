@@ -45,7 +45,6 @@ const renderList = () => {
     <i class="fa fa-play-circle"></i>
     <p>${title}</p>
     <p># ${mood}</p>
-    <small>fix...</small>
     </article>
     `;
     })
@@ -79,10 +78,7 @@ const start = () => {
   renderList();
 
   const listTrackInfo = [...document.querySelectorAll('.list-track-info')];
-  console.log(listTrackInfo);
   listTrackInfo.forEach((song) => {
-    console.log(song);
-
     song.addEventListener('click', (e) => {
       listTrackInfo.forEach((tjun) => {
         tjun.classList.remove('track-active');
@@ -93,7 +89,6 @@ const start = () => {
       track.paused ? track.play() : track.pause();
       const selected = e.currentTarget.dataset.id;
       trackIndex = selected - 1;
-      console.log(trackIndex);
       loadTrack(trackIndex);
       song.classList.add('track-active');
     });
@@ -180,6 +175,7 @@ repeatTrack.addEventListener('click', () => {
 track.addEventListener('ended', () => {
   playNext();
 });
+
 nextTrack.addEventListener('click', playNext);
 nextTrack.addEventListener('click', playNext);
 
@@ -248,7 +244,6 @@ function setVolume(e) {
 
     volumeSliderContainer.style.setProperty('--progres-position', percent);
     track.volume = percent;
-    console.log(percent);
   }
 }
 

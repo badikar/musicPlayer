@@ -65,20 +65,14 @@ body {
   justify-content: space-around;
   align-items: center;
   margin: 1rem 0;
-  /* padding: 10px 0; */
   border-radius: 10px;
-  border: solid 1px transparent;
   box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 8px, rgba(0, 0, 0, 0.05) 0px 5px 5px;
   background: #eeeeeb;
 }
 .buttons > div {
-  padding: 10px;
+  padding: 10px 0;
 }
-.active {
-  background: #000;
-  border-radius: 50%;
-  color: #fff;
-}
+
 .repeat-track,
 .random-track,
 .play-track,
@@ -86,9 +80,6 @@ body {
 .next-track {
   opacity: 0.6;
   transition: opacity 0.2s;
-}
-.opacityChange {
-  opacity: 1;
 }
 
 .slider-container {
@@ -103,12 +94,11 @@ body {
 }
 
 .current-time,
-.total-duration {
-  padding: 10px;
-}
+.total-duration,
 i.fa-volume-down,
 i.fa-volume-up {
-  padding: 10px;
+  padding: 8px 6px;
+  opacity: 0.7;
 }
 i,
 i.fa-play-circle,
@@ -116,10 +106,6 @@ i.fa-pause-circle,
 i.fa-step-forward,
 i.fa-step-backward {
   cursor: pointer;
-}
-
-.volume-slider {
-  width: 40%;
 }
 
 .list-track-info {
@@ -147,107 +133,17 @@ i.fa-step-backward {
   scale: 1.1;
 }
 
-/* input-range  generator:https://www.cssportal.com/style-input-range/ */
-input {
-  -webkit-appearance: none;
-  background: transparent;
-  height: auto;
-  width: 100%;
-}
-input:focus {
-  outline: none;
-}
-input::-webkit-slider-runnable-track {
-  width: 100%;
-  height: 8px;
-  cursor: pointer;
-  animate: 0.2s;
-  box-shadow: 0px 0px 0px #000000;
-  background: #eeeeeb;
-  border-radius: 8px;
-  border: 1px solid #d1d1d1;
-}
-input::-webkit-slider-thumb {
-  box-shadow: 0px 0px 0px #000000;
-  border: 1px solid #d1d1d1;
-  height: 20px;
-  width: 20px;
-  border-radius: 20px;
-  background: #ffffff;
-  cursor: pointer;
-  -webkit-appearance: none;
-  margin-top: -7px;
-}
-input:focus::-webkit-slider-runnable-track {
-  background: #eeeeeb;
-}
-input::-moz-range-track {
-  width: 100%;
-  height: 8px;
-  cursor: pointer;
-  animate: 0.2s;
-  box-shadow: 0px 0px 0px #000000;
-  background: #eeeeeb;
-  border-radius: 8px;
-  border: 1px solid #d1d1d1;
-}
-input::-moz-range-thumb {
-  box-shadow: 0px 0px 0px #000000;
-  border: 1px solid #d1d1d1;
-  height: 20px;
-  width: 20px;
-  border-radius: 20px;
-  background: #ffffff;
-  cursor: pointer;
-}
-input::-ms-track {
-  width: 100%;
-  height: 8px;
-  cursor: pointer;
-  animate: 0.2s;
-  background: transparent;
-  border-color: transparent;
-  color: transparent;
-}
-input::-ms-fill-lower {
-  background: #eeeeeb;
-  border: 1px solid #d1d1d1;
-  border-radius: 16px;
-  box-shadow: 0px 0px 0px #000000;
-}
-input::-ms-fill-upper {
-  background: #eeeeeb;
-  border: 1px solid #d1d1d1;
-  border-radius: 16px;
-  box-shadow: 0px 0px 0px #000000;
-}
-input::-ms-thumb {
-  margin-top: 1px;
-  box-shadow: 0px 0px 0px #000000;
-  border: 1px solid #d1d1d1;
-  height: 20px;
-  width: 20px;
-  border-radius: 20px;
-  background: #ffffff;
-  cursor: pointer;
-}
-input:focus::-ms-fill-lower {
-  background: #eeeeeb;
-}
-input:focus::-ms-fill-upper {
-  background: #eeeeeb;
-}
 /* &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& */
 .duration-container {
   display: flex;
-  border: solid 1px red;
+  /* border: solid 1px red; */
   gap: 0.5rem;
 }
 .timeline-container {
   display: flex;
   justify-content: center;
   width: 100%;
-  border: solid 1px rgb(156, 244, 3);
+  /* border: solid 1px rgb(156, 244, 3); */
   position: relative;
   cursor: pointer;
   padding: 0 1rem;
@@ -286,9 +182,9 @@ input:focus::-ms-fill-upper {
 }
 
 .volume-container {
-  border: solid 1px red;
+  /* border: solid 1px red; */
   display: flex;
-  width: 60%;
+  width: 70%;
   margin: 0 auto;
   gap: 0.5rem;
 }
@@ -296,15 +192,14 @@ input:focus::-ms-fill-upper {
   display: flex;
   justify-content: center;
   width: 100%;
-  border: solid 1px rgb(21, 22, 20);
+  /* border: solid 1px rgb(21, 22, 20); */
   position: relative;
   cursor: pointer;
-  /* padding: 0 1rem; */
 }
 .volume-slider {
   position: absolute;
   background: rgb(255, 255, 255);
-  width: calc(100%);
+  width: 100%;
   height: 8px;
   border: solid 1px rgb(127, 127, 127);
   border-radius: 8px;
