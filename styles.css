@@ -18,7 +18,8 @@ body {
 }
 
 .container {
-  width: 90vw;
+  /* narrow 95vw */
+  width: 95vw;
   max-width: 480px;
   background: #e5ead4;
   padding: 1rem;
@@ -202,7 +203,7 @@ i.fa-step-backward {
 .volume-container {
   /* border: solid 1px red; */
   display: flex;
-  width: 50%;
+  width: 85%;
   margin: 0 auto;
   gap: 0.5rem;
 }
