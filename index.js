@@ -10,8 +10,6 @@ const randomTrack = getEl('.random-track');
 const prevTrack = getEl('.prev-track');
 const nextTrack = getEl('.next-track');
 const repeatTrack = getEl('.repeat-track');
-const volumeSlider = getEl('.volume-slider');
-// const seekSlider = getEl('.seek-slider');
 const currentTimeDOM = getEl('.current-time');
 const totalDuration = getEl('.total-duration');
 
@@ -60,8 +58,10 @@ function loadTrack(index) {
   });
 }
 
+// ********* INITIAL LOAD ***********************
 loadTrack(trackIndex);
 
+// ********* PLAY FROM THE LIST******************
 listTrackInfo.forEach((trak) => {
   trak.addEventListener('click', function (e) {
     const selected = e.currentTarget.dataset.id;
@@ -152,18 +152,6 @@ nextTrack.addEventListener('click', playNext);
 prevTrack.addEventListener('click', playPrev);
 randomTrack.addEventListener('click', playRandom);
 
-// volume slider
-// track.volume = volumeSlider.value / 100;
-// volumeSlider.addEventListener('pointerup', () => {
-//   track.volume = volumeSlider.value / 100;
-// });
-// volumeSlider.addEventListener('mousemove', () => {
-//   track.volume = volumeSlider.value / 100;
-// });
-// volumeSlider.addEventListener('pointermove', () => {
-//   track.volume = volumeSlider.value / 100;
-// });
-
 // ********************************
 
 const timelineContainer = getEl('.timeline-container');
@@ -187,16 +175,7 @@ function updateProgress() {
   // console.log(percent);
   timelineContainer.style.setProperty('--progres-position', percent);
 
-  currentTimeDOM.innerText = timeDisplay(track.currentTime);
-}
-
-// all audio tracks < 1min so used quicker way
-function timeDisplay(value) {
-  if (value < 10) {
-    return `00:0${Math.floor(value)}`;
-  } else {
-    return `00:${Math.floor(value)}`;
-  }
+  currentTimeDOM.innerText = formatDuration(track.currentTime);
 }
 
 // duration slider
