@@ -57,10 +57,7 @@ function loadTrack(index) {
   listTrackInfo.forEach((trak) => {
     trak.classList.remove('track-active');
   });
-  listTrackInfo[index].classList.add('track-active');
-  if (track.paused) {
-    console.log('pauza');
-  }
+  // listTrackInfo[index].classList.add('track-active');
 }
 
 loadTrack(trackIndex);
@@ -153,6 +150,7 @@ function pauseTrack() {
   track.pause();
 }
 function playTrack() {
+  listTrackInfo[trackIndex].classList.add('track-active');
   track.play();
   isPlaying = true;
   playPause.children[0].classList.remove('fa-play-circle');
