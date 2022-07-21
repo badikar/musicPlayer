@@ -57,9 +57,7 @@ function loadTrack(index) {
   listTrackInfo.forEach((trak) => {
     trak.classList.remove('track-active');
     trak.children[0].classList.add('fa-play-circle');
-    trak.children[0].classList.remove('fa-pause-circle');
   });
-  // listTrackInfo[index].classList.add('track-active');
 }
 
 loadTrack(trackIndex);
@@ -72,44 +70,6 @@ listTrackInfo.forEach((trak) => {
     playTrack();
   });
 });
-
-// zeby zaladowac pozniej scr wstaw 2gi argument INXEX.SRC
-
-// loadTrack(trackIndex);
-
-// const listTrackInfo = [...document.querySelectorAll('.list-track-info')];
-// console.log(listTrackInfo);
-
-// listTrackInfo.forEach((song) => {
-//   console.log(song);
-
-//   song.addEventListener('click', (e) => {
-//     listTrackInfo.forEach((tjun) => {
-//       tjun.classList.remove('track-active');
-//       tjun.firstElementChild.classList.remove('fa-pause-circle');
-//       tjun.firstElementChild.classList.add('fa-play-circle');
-//     });
-//     const selected = e.currentTarget.dataset.id;
-//     trackIndex = selected - 1;
-//     console.log(trackIndex);
-//     loadTrack(trackIndex);
-//     song.classList.add('track-active');
-//     track.play();
-//   });
-// });
-
-// song.addEventListener('click', (e) => {
-//   listTrackInfo.forEach((tjun) => {
-//     tjun.classList.remove('track-active');
-//     tjun.firstElementChild.classList.remove('fa-pause-circle');
-//     tjun.firstElementChild.classList.add('fa-play-circle');
-//   });
-// });
-
-// const start = () => {
-//   renderList();
-//   loadTrack(trackIndex);
-// };
 
 // player buttons functionality
 function playNext() {
@@ -133,7 +93,7 @@ function playRandom() {
   trackIndex = Math.floor(Math.random() * tracks.length);
   loadTrack(trackIndex);
   listTrackInfo[trackIndex].classList.add('track-active');
-  track.play();
+  playTrack();
 }
 function repeatOn() {
   isRepeated = true;
