@@ -23,19 +23,6 @@ let isPlaying = false;
 let isRepeated = false;
 let track = document.createElement('audio');
 
-// Initial load track DOM info
-// zeby zaladowac pozniej scr wstaw 2gi argument INXEX.SRC
-
-function loadTrack(index) {
-  trackNumber.innerText = `Playing ${tracks[index].id} of ${tracks.length}`;
-  trackName.innerText = tracks[index].title;
-  trackMood.innerText = tracks[index].mood;
-  track.src = tracks[index].src;
-  track.setAttribute('preload', 'metadata');
-  track.onloadedmetadata = function () {
-    totalDuration.innerText = formatDuration(track.duration);
-  };
-}
 const renderList = () => {
   const trackList = tracks
     .map((singleTrack) => {
@@ -51,6 +38,45 @@ const renderList = () => {
     .join('');
   listDOM.innerHTML = trackList;
 };
+
+renderList();
+
+const listTrackInfo = [...document.querySelectorAll('.list-track-info')];
+
+//  load track DOM info
+function loadTrack(index) {
+  trackNumber.innerText = `Playing ${tracks[index].id} of ${tracks.length}`;
+  trackName.innerText = tracks[index].title;
+  trackMood.innerText = tracks[index].mood;
+  track.src = tracks[index].src;
+  track.setAttribute('preload', 'metadata');
+  track.onloadedmetadata = function () {
+    totalDuration.innerText = formatDuration(track.duration);
+  };
+
+  listTrackInfo.forEach((trak) => {
+    trak.classList.remove('track-active');
+  });
+  listTrackInfo[index].classList.add('track-active');
+  if (track.paused) {
+    console.log('pauza');
+  }
+}
+
+loadTrack(trackIndex);
+
+listTrackInfo.forEach((trak) => {
+  trak.addEventListener('click', function (e) {
+    const selected = e.currentTarget.dataset.id;
+    trackIndex = selected - 1;
+    loadTrack(trackIndex);
+    playTrack();
+  });
+});
+
+// zeby zaladowac pozniej scr wstaw 2gi argument INXEX.SRC
+
+// loadTrack(trackIndex);
 
 // const listTrackInfo = [...document.querySelectorAll('.list-track-info')];
 // console.log(listTrackInfo);
@@ -73,35 +99,19 @@ const renderList = () => {
 //   });
 // });
 
-const start = () => {
-  loadTrack(trackIndex);
-  renderList();
+// song.addEventListener('click', (e) => {
+//   listTrackInfo.forEach((tjun) => {
+//     tjun.classList.remove('track-active');
+//     tjun.firstElementChild.classList.remove('fa-pause-circle');
+//     tjun.firstElementChild.classList.add('fa-play-circle');
+//   });
+// });
 
-  const listTrackInfo = [...document.querySelectorAll('.list-track-info')];
-  listTrackInfo.forEach((song) => {
-    song.addEventListener('click', (e) => {
-      listTrackInfo.forEach((tjun) => {
-        tjun.classList.remove('track-active');
-        tjun.firstElementChild.classList.remove('fa-pause-circle');
-        tjun.firstElementChild.classList.add('fa-play-circle');
-      });
+// const start = () => {
+//   renderList();
+//   loadTrack(trackIndex);
+// };
 
-      track.paused ? track.play() : track.pause();
-      const selected = e.currentTarget.dataset.id;
-      trackIndex = selected - 1;
-      loadTrack(trackIndex);
-      song.classList.add('track-active');
-    });
-
-    // song.addEventListener('click', (e) => {
-    //   listTrackInfo.forEach((tjun) => {
-    //     tjun.classList.remove('track-active');
-    //     tjun.firstElementChild.classList.remove('fa-pause-circle');
-    //     tjun.firstElementChild.classList.add('fa-play-circle');
-    //   });
-    // });
-  });
-};
 // player buttons functionality
 function playNext() {
   trackIndex++;
@@ -142,21 +152,16 @@ function pauseTrack() {
   isPlaying = false;
   track.pause();
 }
-async function playTrack() {
-  try {
-    await track.play();
-    isPlaying = true;
-    playPause.children[0].classList.remove('fa-play-circle');
-    playPause.children[0].classList.add('fa-pause-circle');
-  } catch (err) {
-    console.log('blad');
-    playPause.children[0].classList.remove('fa-pause-circle');
-  }
+function playTrack() {
+  track.play();
+  isPlaying = true;
+  playPause.children[0].classList.remove('fa-play-circle');
+  playPause.children[0].classList.add('fa-pause-circle');
 }
 
 // event listeners
 
-window.addEventListener('DOMContentLoaded', start);
+// window.addEventListener('DOMContentLoaded', start);
 
 playPause.addEventListener('click', () => {
   if (isPlaying) {
