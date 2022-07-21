@@ -56,6 +56,8 @@ function loadTrack(index) {
 
   listTrackInfo.forEach((trak) => {
     trak.classList.remove('track-active');
+    trak.children[0].classList.add('fa-play-circle');
+    trak.children[0].classList.remove('fa-pause-circle');
   });
   // listTrackInfo[index].classList.add('track-active');
 }
@@ -149,6 +151,8 @@ function pauseTrack() {
   playPause.children[0].classList.add('fa-play-circle');
   isPlaying = false;
   track.pause();
+  listTrackInfo[trackIndex].children[0].classList.add('fa-play-circle');
+  listTrackInfo[trackIndex].children[0].classList.remove('fa-pause-circle');
 }
 function playTrack() {
   listTrackInfo[trackIndex].classList.add('track-active');
@@ -156,6 +160,8 @@ function playTrack() {
   isPlaying = true;
   playPause.children[0].classList.remove('fa-play-circle');
   playPause.children[0].classList.add('fa-pause-circle');
+  listTrackInfo[trackIndex].children[0].classList.remove('fa-play-circle');
+  listTrackInfo[trackIndex].children[0].classList.add('fa-pause-circle');
 }
 
 // event listeners
