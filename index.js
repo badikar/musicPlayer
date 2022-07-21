@@ -130,6 +130,7 @@ function playPrev() {
 function playRandom() {
   trackIndex = Math.floor(Math.random() * tracks.length);
   loadTrack(trackIndex);
+  listTrackInfo[trackIndex].classList.add('track-active');
   track.play();
 }
 function repeatOn() {
